@@ -1,22 +1,26 @@
 
 export interface Product {
   id: string;
+  slug: string; // Required for dynamic routing
   name: string;
   description: string;
-  /** Added fullDescription to fix error in app/products/[id]/page.tsx */
   fullDescription?: string;
+  // Fix: Add database schema fields to Product interface
+  full_description?: string; 
+  short_description?: string;
   price: string;
   category: string;
   rating: number;
   features: string[];
   imageUrl: string;
-  /** Added images for gallery support */
+  // Fix: Add database schema image_url
+  image_url?: string;
   images?: string[];
-  /** Added vendorId to fix error in app/products/[id]/page.tsx */
   vendorId?: string;
-  /** Added stockStatus */
   stockStatus?: string;
   isActive: boolean;
+  // Fix: Add database schema pricing_unit
+  pricing_unit?: string;
 }
 
 export interface Category {
@@ -31,9 +35,7 @@ export interface Vendor {
   id: string;
   name: string;
   logo: string;
-  /** Added location for display on product details */
   location?: string;
-  /** Added performanceScore for trust badge */
   performanceScore?: number;
 }
 
@@ -42,10 +44,7 @@ export interface Blog {
   title: string;
   slug: string;
   content: string;
-  /** Added category for display on blog pages */
   category?: string;
-  /** Added publishedAt for display on blog pages */
   publishedAt?: string;
-  /** Added metaDescription for SEO and summaries */
   metaDescription?: string;
 }

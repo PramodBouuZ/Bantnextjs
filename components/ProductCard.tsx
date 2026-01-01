@@ -1,12 +1,17 @@
 
+'use client';
+
 import React from 'react';
 import { Star, Globe, Zap, CheckCircle2, CalendarCheck } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 export const ProductCard: React.FC<{ product: any }> = ({ product }) => {
+  // Use slug for routing if available, fallback to ID
+  const productSlug = product.slug || product.id;
+
   return (
     <div className="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 group hover:shadow-xl transition-all duration-300 flex flex-col h-full">
-      <Link to={`/products/${product.id}`} className="relative h-48 overflow-hidden block">
+      <Link href={`/products/${productSlug}`} className="relative h-48 overflow-hidden block">
         <img 
           src={product.image_url || product.imageUrl || 'https://via.placeholder.com/400x300'} 
           alt={product.name}
@@ -22,7 +27,7 @@ export const ProductCard: React.FC<{ product: any }> = ({ product }) => {
       </Link>
 
       <div className="p-6 flex flex-col flex-grow">
-        <Link to={`/products/${product.id}`}>
+        <Link href={`/products/${productSlug}`}>
           <h3 className="text-xl font-black text-slate-800 mb-2 hover:text-blue-600 transition-colors tracking-tight">{product.name}</h3>
         </Link>
         <p className="text-slate-500 text-sm mb-4 line-clamp-2 font-medium">{product.short_description || product.description}</p>
@@ -51,13 +56,13 @@ export const ProductCard: React.FC<{ product: any }> = ({ product }) => {
 
           <div className="grid grid-cols-2 gap-2">
             <Link 
-              to={`/products/${product.id}`} 
+              href={`/products/${productSlug}`} 
               className="bg-blue-600 text-white font-black py-4 rounded-xl hover:bg-blue-700 transition-colors text-center shadow-lg shadow-blue-100 flex items-center justify-center space-x-2 text-sm uppercase tracking-widest"
             >
               <span>View</span>
             </Link>
             <Link 
-              to="/post-requirement" 
+              href="/post-requirement" 
               className="bg-amber-400 text-slate-900 font-black py-4 rounded-xl hover:bg-amber-500 transition-colors text-center shadow-lg shadow-amber-100 flex items-center justify-center space-x-2 text-sm uppercase tracking-widest"
             >
               <CalendarCheck size={16} />

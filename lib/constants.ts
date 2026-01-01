@@ -9,7 +9,6 @@ export const CATEGORIES: Category[] = [
   { id: 'c5', name: 'Security', icon: '🛡️', isActive: true, itemCount: 4 }
 ];
 
-/** Exported MOCK_VENDORS to fix error in app/products/[id]/page.tsx */
 export const MOCK_VENDORS: Vendor[] = [
   {
     id: 'v1',
@@ -30,9 +29,9 @@ export const MOCK_VENDORS: Vendor[] = [
 export const MOCK_PRODUCTS: Product[] = [
   {
     id: '1',
+    slug: 'enterprise-erp-suite',
     name: 'Enterprise ERP Suite',
     description: 'Complete cloud-based process automation for MSMEs.',
-    /** Added fullDescription to fix error in app/products/[id]/page.tsx */
     fullDescription: 'Our Enterprise ERP Suite is designed specifically for Indian MSMEs to manage their end-to-end business processes. From inventory tracking to GST-compliant invoicing, everything is handled seamlessly.',
     price: '10,000',
     category: 'Software',
@@ -40,16 +39,15 @@ export const MOCK_PRODUCTS: Product[] = [
     features: ['GST Ready', 'Multi-tenant', 'Mobile App'],
     imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800',
     images: ['https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800'],
-    /** Added vendorId to fix error in app/products/[id]/page.tsx */
     vendorId: 'v2',
     stockStatus: 'In Stock',
     isActive: true,
   },
   {
     id: '2',
+    slug: 'business-crm-pro',
     name: 'Business CRM Pro',
     description: 'Lead management and sales tracking for small teams.',
-    /** Added fullDescription to support product detail views */
     fullDescription: 'Boost your sales productivity with CRM Pro. Features pipeline management, lead scoring, and automated follow-ups tailored for the Indian market.',
     price: '5,000',
     category: 'Software',
@@ -57,14 +55,12 @@ export const MOCK_PRODUCTS: Product[] = [
     features: ['Pipeline Management', 'WhatsApp Integration'],
     imageUrl: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800',
     images: ['https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800'],
-    /** Added vendorId */
     vendorId: 'v2',
     stockStatus: 'In Stock',
     isActive: true,
   },
 ];
 
-/** Exported MOCK_BLOGS to fix error in app/blog/[slug]/page.tsx */
 export const MOCK_BLOGS: Blog[] = [
   {
     id: 'b1',
