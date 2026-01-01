@@ -87,6 +87,8 @@ export const MOCK_LEADS: Lead[] = [
 export const MOCK_PRODUCTS: Product[] = [
   {
     id: '1',
+    // Added slug to satisfy the Product interface and enable lookup in ProductDetails
+    slug: 'enterprise-erp-suite',
     name: 'Enterprise ERP Suite',
     description: 'Complete cloud-based process automation.',
     fullDescription: 'Our Enterprise ERP Suite is designed specifically for Indian MSMEs to manage their end-to-end business processes. From inventory tracking to GST-compliant invoicing, everything is handled seamlessly.',
@@ -103,6 +105,8 @@ export const MOCK_PRODUCTS: Product[] = [
   },
   {
     id: '2',
+    // Added slug to satisfy the Product interface and enable lookup in ProductDetails
+    slug: 'business-crm-pro',
     name: 'Business CRM Pro',
     description: 'Customer relationship management for sales teams.',
     fullDescription: 'Boost your sales productivity with CRM Pro. Features pipeline management, lead scoring, and automated follow-ups tailored for the Indian market.',
@@ -118,6 +122,8 @@ export const MOCK_PRODUCTS: Product[] = [
   },
   {
     id: '3',
+    // Added slug to satisfy the Product interface and enable lookup in ProductDetails
+    slug: 'cloud-accounting-suite',
     name: 'Cloud Accounting Suite',
     description: 'Automated bookkeeping and GST filings.',
     fullDescription: 'Simplify your accounts with our Cloud Accounting Suite. Automated bank reconciliations and direct filing for GSTR-1 and GSTR-3B.',
@@ -133,6 +139,8 @@ export const MOCK_PRODUCTS: Product[] = [
   },
   {
     id: '4',
+    // Added slug to satisfy the Product interface and enable lookup in ProductDetails
+    slug: 'dedicated-fiber-internet',
     name: 'Dedicated Fiber Internet',
     description: 'High-speed 1:1 contention internet lease line.',
     fullDescription: 'Get enterprise-grade connectivity with our Dedicated Fiber Internet. 99.9% uptime SLA and 24/7 proactive monitoring.',
@@ -148,6 +156,8 @@ export const MOCK_PRODUCTS: Product[] = [
   },
   {
     id: '5',
+    // Added slug to satisfy the Product interface and enable lookup in ProductDetails
+    slug: 'cloud-voice-pbx',
     name: 'Cloud Voice PBX',
     description: 'Virtual phone system for distributed teams.',
     fullDescription: 'Modernize your business communication with Cloud Voice. IVR, call recording, and softphone support included.',

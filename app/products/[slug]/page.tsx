@@ -12,7 +12,7 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  // Try mock data first, then DB for flexibility
+  // Check mock data first, then DB
   let product: any = MOCK_PRODUCTS.find(p => p.slug === params.slug || p.id === params.slug);
   if (!product) {
     try {
@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ProductPage({ params }: Props) {
-  // Resolve product using slug parameter
+  // Resolve product from Mocks or Database using the slug parameter
   let product: any = MOCK_PRODUCTS.find(p => p.slug === params.slug || p.id === params.slug);
   if (!product) {
     try {
@@ -48,7 +48,7 @@ export default async function ProductPage({ params }: Props) {
 
   if (!product) notFound();
 
-  // Vendor resolution
+  // Handle vendor mapping
   const vendorId = product.vendorId || (product.vendors?.[0]?.vendors?.id);
   const vendor = MOCK_VENDORS.find(v => v.id === vendorId) || product.vendors?.[0]?.vendors;
 

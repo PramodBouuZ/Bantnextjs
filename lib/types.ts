@@ -53,3 +53,23 @@ export interface Blog {
   metaTitle?: string;
   metaDescription?: string;
 }
+
+export interface GlobalSettings {
+  siteLogo: string;
+  favicon: string;
+  whatsappNumber: string;
+  footerText: string;
+  headerPromo: string;
+  socialLinks: {
+    facebook: string;
+    linkedin: string;
+    instagram: string;
+    twitter: string;
+  };
+  notifications: {
+    newLead: boolean;
+    leadAssigned: boolean;
+    vendorResponse: boolean;
+    statusUpdate: boolean;
+  };
+}

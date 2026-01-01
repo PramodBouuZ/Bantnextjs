@@ -33,6 +33,8 @@ export interface Lead {
 
 export interface Product {
   id: string;
+  // Added slug for SEO-friendly routing and fixed "Property 'slug' does not exist on type 'Product'" errors
+  slug: string;
   name: string;
   description: string;
   fullDescription?: string;

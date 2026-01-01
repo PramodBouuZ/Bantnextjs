@@ -42,6 +42,7 @@ export const MOCK_PRODUCTS: Product[] = [
     vendorId: 'v2',
     stockStatus: 'In Stock',
     isActive: true,
+    similarProducts: ['business-crm-pro']
   },
   {
     id: '2',
