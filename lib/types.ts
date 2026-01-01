@@ -1,11 +1,10 @@
 
 export interface Product {
   id: string;
-  slug: string; // Required for dynamic routing
+  slug: string; // Required for SEO-friendly dynamic routing
   name: string;
   description: string;
   fullDescription?: string;
-  // Fix: Add database schema fields to Product interface
   full_description?: string; 
   short_description?: string;
   price: string;
@@ -13,14 +12,13 @@ export interface Product {
   rating: number;
   features: string[];
   imageUrl: string;
-  // Fix: Add database schema image_url
   image_url?: string;
   images?: string[];
   vendorId?: string;
-  stockStatus?: string;
+  stockStatus: 'In Stock' | 'Limited' | 'Out of Stock';
   isActive: boolean;
-  // Fix: Add database schema pricing_unit
   pricing_unit?: string;
+  similarProducts?: string[]; 
 }
 
 export interface Category {
@@ -34,8 +32,13 @@ export interface Category {
 export interface Vendor {
   id: string;
   name: string;
+  contactPerson?: string;
+  email?: string;
+  mobile?: string;
   logo: string;
   location?: string;
+  status?: 'PENDING' | 'ACTIVE' | 'INACTIVE' | 'REJECTED';
+  services?: string[];
   performanceScore?: number;
 }
 
@@ -44,7 +47,9 @@ export interface Blog {
   title: string;
   slug: string;
   content: string;
-  category?: string;
-  publishedAt?: string;
+  category: string;
+  publishedAt: string;
+  isPublished: boolean;
+  metaTitle?: string;
   metaDescription?: string;
 }

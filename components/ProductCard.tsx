@@ -6,7 +6,7 @@ import { Star, Globe, Zap, CheckCircle2, CalendarCheck } from 'lucide-react';
 import Link from 'next/link';
 
 export const ProductCard: React.FC<{ product: any }> = ({ product }) => {
-  // Use slug for routing if available, fallback to ID
+  // Use slug for routing, which is now the standard dynamic param
   const productSlug = product.slug || product.id;
 
   return (

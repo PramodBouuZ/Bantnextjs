@@ -9,8 +9,8 @@ export default function ProductsPage({
 }: {
   searchParams: { category?: string; query?: string };
 }) {
-  const selectedCat = searchParams.category || 'All';
-  const query = searchParams.query || '';
+  const selectedCat = searchParams?.category || 'All';
+  const query = searchParams?.query || '';
 
   const filteredProducts = MOCK_PRODUCTS.filter(p => {
     const matchesCategory = selectedCat === 'All' || p.category === selectedCat;

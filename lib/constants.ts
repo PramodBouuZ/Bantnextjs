@@ -31,12 +31,12 @@ export const MOCK_PRODUCTS: Product[] = [
     id: '1',
     slug: 'enterprise-erp-suite',
     name: 'Enterprise ERP Suite',
-    description: 'Complete cloud-based process automation for MSMEs.',
-    fullDescription: 'Our Enterprise ERP Suite is designed specifically for Indian MSMEs to manage their end-to-end business processes. From inventory tracking to GST-compliant invoicing, everything is handled seamlessly.',
-    price: '10,000',
+    description: 'Complete cloud-based process automation.',
+    fullDescription: 'Our Enterprise ERP Suite is designed specifically for Indian MSMEs to manage their end-to-end business processes.',
+    price: '10,000/mo',
     category: 'Software',
     rating: 4.8,
-    features: ['GST Ready', 'Multi-tenant', 'Mobile App'],
+    features: ['GST Ready', 'Multi-tenant', 'Mobile App', 'AI Reports'],
     imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800',
     images: ['https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800'],
     vendorId: 'v2',
@@ -47,18 +47,18 @@ export const MOCK_PRODUCTS: Product[] = [
     id: '2',
     slug: 'business-crm-pro',
     name: 'Business CRM Pro',
-    description: 'Lead management and sales tracking for small teams.',
-    fullDescription: 'Boost your sales productivity with CRM Pro. Features pipeline management, lead scoring, and automated follow-ups tailored for the Indian market.',
-    price: '5,000',
+    description: 'Customer relationship management for sales teams.',
+    fullDescription: 'Boost your sales productivity with CRM Pro featuring lead scoring and automation.',
+    price: '5,000/mo',
     category: 'Software',
     rating: 4.6,
-    features: ['Pipeline Management', 'WhatsApp Integration'],
+    features: ['Pipeline View', 'WhatsApp Integration', 'Team Lead Assign'],
     imageUrl: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800',
     images: ['https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800'],
     vendorId: 'v2',
     stockStatus: 'In Stock',
-    isActive: true,
-  },
+    isActive: true
+  }
 ];
 
 export const MOCK_BLOGS: Blog[] = [
@@ -69,6 +69,7 @@ export const MOCK_BLOGS: Blog[] = [
     content: 'Full article content here...',
     category: 'Technology',
     publishedAt: '2025-05-01',
+    isPublished: true,
     metaDescription: 'Learn how AI is changing lead qualification.'
   }
 ];

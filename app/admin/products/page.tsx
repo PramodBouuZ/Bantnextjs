@@ -4,9 +4,8 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import { 
-  Plus, Search, Edit, Trash2, Package, 
-  Image as ImageIcon, Save, X, Loader2,
-  CheckCircle2, AlertCircle
+  Plus, Edit, Trash2, Package, 
+  Image as ImageIcon, Save, X, Loader2
 } from 'lucide-react';
 
 export default function ProductCatalog() {
@@ -38,7 +37,7 @@ export default function ProductCatalog() {
   const handleOpenModal = (product = null) => {
     setEditingProduct(product || {
       name: '',
-      slug: '',
+      slug: '', // Crucial for new routing
       category_id: '',
       vendor_id: '',
       price: 0,
@@ -70,13 +69,6 @@ export default function ProductCatalog() {
     }
   };
 
-  const handleDelete = async (id: string) => {
-    if (confirm('Are you sure you want to delete this product?')) {
-      await supabase.from('products').delete().eq('id', id);
-      fetchData();
-    }
-  };
-
   return (
     <div className="space-y-8">
       <div className="flex items-center justify-between">
@@ -102,7 +94,6 @@ export default function ProductCatalog() {
                 <th className="px-8 py-5">Category</th>
                 <th className="px-8 py-5">Vendor</th>
                 <th className="px-8 py-5">Price</th>
-                <th className="px-8 py-5">Status</th>
                 <th className="px-8 py-5 text-right">Actions</th>
               </tr>
             </thead>
@@ -121,18 +112,13 @@ export default function ProductCatalog() {
                   <td className="px-8 py-6 text-sm font-medium">{p.categories?.name}</td>
                   <td className="px-8 py-6 text-sm font-medium">{p.vendors?.company_name}</td>
                   <td className="px-8 py-6">
-                    <p className="font-black text-slate-900">₹{p.price.toLocaleString('en-IN')}</p>
+                    <p className="font-black text-slate-900">₹{p.price?.toLocaleString('en-IN')}</p>
                     <p className="text-[10px] text-slate-400 font-bold uppercase">/{p.pricing_unit}</p>
-                  </td>
-                  <td className="px-8 py-6">
-                    <span className={`text-[10px] font-black px-3 py-1 rounded-full uppercase ${p.status === 'published' ? 'bg-green-100 text-green-600' : 'bg-slate-100 text-slate-600'}`}>
-                      {p.status}
-                    </span>
                   </td>
                   <td className="px-8 py-6 text-right">
                     <div className="flex items-center justify-end space-x-2">
                       <button onClick={() => handleOpenModal(p)} className="p-2 text-slate-400 hover:text-blue-600 transition-colors"><Edit size={18}/></button>
-                      <button onClick={() => handleDelete(p.id)} className="p-2 text-slate-400 hover:text-red-600 transition-colors"><Trash2 size={18}/></button>
+                      <button className="p-2 text-slate-400 hover:text-red-600 transition-colors"><Trash2 size={18}/></button>
                     </div>
                   </td>
                 </tr>
@@ -156,7 +142,7 @@ export default function ProductCatalog() {
                 <div className="space-y-6">
                   <div className="space-y-2">
                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Product Name</label>
-                    <input required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-4 outline-none font-bold" value={editingProduct.name} onChange={e => setEditingProduct({...editingProduct, name: e.target.value})} />
+                    <input required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-4 outline-none font-bold" value={editingProduct.name} onChange={e => setEditingProduct({...editingProduct, name: e.target.value, slug: e.target.value.toLowerCase().replace(/\s+/g, '-')})} />
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">URL Slug</label>
@@ -178,45 +164,18 @@ export default function ProductCatalog() {
                       </select>
                     </div>
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Price (INR)</label>
-                      <input type="number" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-4 outline-none font-bold" value={editingProduct.price} onChange={e => setEditingProduct({...editingProduct, price: parseInt(e.target.value)})} />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Unit</label>
-                      <select className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-4 outline-none font-bold" value={editingProduct.pricing_unit} onChange={e => setEditingProduct({...editingProduct, pricing_unit: e.target.value})}>
-                        <option value="mo">Monthly</option>
-                        <option value="yr">Yearly</option>
-                        <option value="once">One-time</option>
-                      </select>
-                    </div>
-                  </div>
                 </div>
 
                 <div className="space-y-6">
                   <div className="space-y-2">
                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Image URL</label>
-                    <div className="flex space-x-4">
-                      <div className="w-20 h-20 bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200 flex items-center justify-center overflow-hidden shrink-0">
-                        {editingProduct.image_url ? <img src={editingProduct.image_url} className="w-full h-full object-cover" /> : <ImageIcon size={24} className="text-slate-300"/>}
-                      </div>
-                      <input className="flex-1 bg-slate-50 border border-slate-200 rounded-2xl px-5 py-4 outline-none text-xs" placeholder="Paste image link..." value={editingProduct.image_url} onChange={e => setEditingProduct({...editingProduct, image_url: e.target.value})} />
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Short Description</label>
-                    <textarea required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-4 outline-none h-24 resize-none" value={editingProduct.short_description} onChange={e => setEditingProduct({...editingProduct, short_description: e.target.value})} />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Features (Comma separated)</label>
-                    <input className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-4 outline-none text-sm" placeholder="GST Ready, 24/7 Support..." value={editingProduct.features?.join(', ')} onChange={e => setEditingProduct({...editingProduct, features: e.target.value.split(',').map(f => f.trim())})} />
+                    <input className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-4 outline-none text-xs" placeholder="Paste image link..." value={editingProduct.image_url} onChange={e => setEditingProduct({...editingProduct, image_url: e.target.value})} />
                   </div>
                   <div className="flex items-center justify-end space-x-4 pt-6">
                     <button type="button" onClick={() => setIsModalOpen(false)} className="px-8 py-4 font-bold text-slate-500">Cancel</button>
                     <button type="submit" disabled={isSaving} className="bg-blue-600 text-white font-black px-12 py-4 rounded-[2rem] shadow-xl shadow-blue-200 hover:bg-blue-700 transition-all flex items-center space-x-2">
                       {isSaving ? <Loader2 className="animate-spin" size={20} /> : <Save size={20} />}
-                      <span>{editingProduct.id ? 'Update Product' : 'Save Product'}</span>
+                      <span>Save Product</span>
                     </button>
                   </div>
                 </div>

@@ -12,42 +12,48 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  // Check mock data first, then DB
-  // Fix: Use any type for product to accommodate both Product interface and raw database results with snake_case fields
+  // Try mock data first, then DB for flexibility
   let product: any = MOCK_PRODUCTS.find(p => p.slug === params.slug || p.id === params.slug);
   if (!product) {
-    product = await getProductBySlug(params.slug);
+    try {
+      product = await getProductBySlug(params.slug);
+    } catch (e) {
+      product = null;
+    }
   }
 
   if (!product) return { title: 'Product Not Found' };
   
   return {
     title: `${product.name} | BantConfirm B2B`,
-    // Fix: Accessing potential snake_case fields from database
     description: product.description || product.short_description,
     openGraph: {
       title: product.name,
       description: product.description || product.short_description,
-      images: [product.imageUrl || product.image_url],
+      images: [product.imageUrl || product.image_url || ''],
     }
   };
 }
 
 export default async function ProductPage({ params }: Props) {
-  // Resolve product from Mocks or Database
+  // Resolve product using slug parameter
   let product: any = MOCK_PRODUCTS.find(p => p.slug === params.slug || p.id === params.slug);
   if (!product) {
-    product = await getProductBySlug(params.slug);
+    try {
+      product = await getProductBySlug(params.slug);
+    } catch (e) {
+      product = null;
+    }
   }
 
   if (!product) notFound();
 
-  // Handle vendor mapping for both data structures
+  // Vendor resolution
   const vendorId = product.vendorId || (product.vendors?.[0]?.vendors?.id);
   const vendor = MOCK_VENDORS.find(v => v.id === vendorId) || product.vendors?.[0]?.vendors;
 
   const recommendedProducts = MOCK_PRODUCTS
-    .filter(p => p.category === product.category && (p.slug !== params.slug && p.id !== params.slug))
+    .filter(p => p.category === product.category && p.slug !== params.slug)
     .slice(0, 4);
 
   return (
@@ -127,9 +133,6 @@ export default async function ProductPage({ params }: Props) {
                 <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Starting Price</p>
                 <div className="flex items-baseline space-x-2">
                   <span className="text-4xl font-black text-slate-900">₹{product.price}</span>
-                  {product.pricing_unit && (
-                    <span className="text-slate-400 text-sm font-bold lowercase">/{product.pricing_unit}</span>
-                  )}
                 </div>
               </div>
 
