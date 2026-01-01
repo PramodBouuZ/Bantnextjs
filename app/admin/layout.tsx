@@ -1,9 +1,6 @@
 
-'use client';
-
 import React from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { 
   LayoutDashboard, Users, Package, FileText, 
   Layers, Store, Settings, LogOut, Bell 
@@ -20,34 +17,24 @@ const navItems = [
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
-
   return (
     <div className="flex min-h-screen bg-slate-50">
-      {/* Sidebar */}
       <aside className="w-72 bg-slate-900 text-white fixed h-full z-50">
         <div className="p-8 border-b border-white/10 flex items-center space-x-2">
           <span className="text-2xl font-black tracking-tighter text-blue-400">BANT</span>
           <span className="text-2xl font-bold tracking-tighter text-amber-400">Admin</span>
         </div>
         <nav className="p-6 space-y-2">
-          {navItems.map((item) => {
-            const isActive = pathname === item.href;
-            return (
-              <Link 
-                key={item.id} 
-                href={item.href}
-                className={`flex items-center space-x-4 px-6 py-4 rounded-2xl transition-all font-bold text-sm ${
-                  isActive 
-                    ? 'bg-blue-600 text-white shadow-xl shadow-blue-900/40' 
-                    : 'text-slate-400 hover:text-white hover:bg-white/5'
-                }`}
-              >
-                <item.icon size={20} />
-                <span>{item.label}</span>
-              </Link>
-            );
-          })}
+          {navItems.map((item) => (
+            <Link 
+              key={item.id} 
+              href={item.href}
+              className="flex items-center space-x-4 px-6 py-4 rounded-2xl transition-all font-bold text-sm text-slate-400 hover:text-white hover:bg-white/5"
+            >
+              <item.icon size={20} />
+              <span>{item.label}</span>
+            </Link>
+          ))}
           <Link 
             href="/login"
             className="w-full flex items-center space-x-4 px-6 py-4 rounded-2xl text-red-400 hover:bg-red-500/10 transition-all font-bold text-sm mt-10"
@@ -58,7 +45,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </nav>
       </aside>
 
-      {/* Main Content */}
       <div className="flex-1 ml-72">
         <header className="h-20 bg-white border-b border-slate-200 sticky top-0 z-40 px-12 flex items-center justify-between">
           <div className="flex items-center space-x-4">

@@ -1,9 +1,9 @@
 
-import { Hero } from "../components/Hero";
-import { DashboardStats } from "../components/DashboardStats";
-import { Marquee } from "../components/Marquee";
-import { ProductCard } from "../components/ProductCard";
-import { MOCK_PRODUCTS, VENDOR_LOGOS } from "../lib/constants";
+import { Hero } from "@/components/Hero";
+import { DashboardStats } from "@/components/DashboardStats";
+import { Marquee } from "@/components/Marquee";
+import { ProductCard } from "@/components/ProductCard";
+import { MOCK_PRODUCTS, VENDOR_LOGOS } from "@/lib/constants";
 import { ArrowRight, Zap, Coins, ShieldAlert, Headphones } from 'lucide-react';
 import Link from 'next/link';
 
@@ -57,27 +57,36 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Why Section */}
-      <section className="bg-slate-50 py-24">
-        <div className="container mx-auto px-4 text-center">
-          <span className="bg-blue-100 text-blue-700 text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-4 inline-block">Why Choose Us</span>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-16">Built for Indian Business Needs</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
-            {[
-              { icon: <Zap className="text-blue-600" />, title: 'Fast-Track Procurement', desc: 'Reduce your IT procurement cycle from months to days.' },
-              { icon: <Coins className="text-amber-600" />, title: 'Transparent Pricing', desc: 'Compare quotes transparently. No hidden fees.' },
-              { icon: <ShieldAlert className="text-blue-500" />, title: 'Verified Sellers Only', desc: 'All vendors subjected to rigorous BANT and KYC verification.' },
-              { icon: <Headphones className="text-amber-800" />, title: 'Dedicated Support', desc: 'Local support team based in Bangalore to assist you.' }
-            ].map((feature, i) => (
-              <div key={i} className="bg-white p-10 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-xl transition-all group">
-                <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  {feature.icon}
+      {/* CTA Section */}
+      <section className="container mx-auto px-4 py-20">
+        <div className="bg-[#0f172a] rounded-[3rem] p-12 md:p-20 text-white relative overflow-hidden group">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-[100px] -z-10 translate-x-1/3 -translate-y-1/3 transition-all duration-700"></div>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <span className="bg-blue-600/20 text-blue-400 text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-6 inline-block">Partner With Us</span>
+              <h2 className="text-4xl md:text-5xl font-black mb-6 leading-tight">Scale Your Business as a Verified Vendor</h2>
+              <p className="text-slate-400 text-lg mb-10 leading-relaxed">
+                Reach thousands of BANT-qualified enterprise buyers across India. Gain access to a high-intent audience and close deals faster.
+              </p>
+              <Link href="/become-vendor" className="inline-flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white font-bold px-10 py-5 rounded-2xl shadow-xl transition-all">
+                <span>Become a Vendor</span>
+                <ArrowRight size={20} />
+              </Link>
+            </div>
+            <div className="relative bg-white/5 backdrop-blur-md rounded-[2.5rem] border border-white/10 p-10">
+                <div className="grid grid-cols-2 gap-6">
+                    <div className="bg-white/5 p-6 rounded-3xl text-center border border-white/5">
+                        <Zap size={32} className="mx-auto mb-4 text-amber-400" />
+                        <p className="text-2xl font-black">1.2K+</p>
+                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">Vendors</p>
+                    </div>
+                    <div className="bg-white/5 p-6 rounded-3xl text-center border border-white/5">
+                        <Coins size={32} className="mx-auto mb-4 text-green-400" />
+                        <p className="text-2xl font-black">50K+</p>
+                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">Leads/Mo</p>
+                    </div>
                 </div>
-                <h4 className="text-xl font-bold mb-4 text-slate-900">{feature.title}</h4>
-                <p className="text-slate-500 leading-relaxed mb-6 text-sm">{feature.desc}</p>
-                <Link href="/about" className="text-blue-600 font-bold text-xs uppercase tracking-widest hover:underline">Learn more →</Link>
-              </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>

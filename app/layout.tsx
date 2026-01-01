@@ -3,8 +3,8 @@ import React from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Header } from "../components/Header";
-import { Footer } from "../components/Footer";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 import { AlertCircle, MessageSquare } from "lucide-react";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -15,7 +15,6 @@ export const metadata: Metadata = {
   openGraph: {
     title: "BantConfirm - B2B AI Marketplace",
     description: "Find enterprise-grade IT, Software, and Telecom solutions verified by AI.",
-    images: ["/og-image.jpg"],
   },
 };
 
